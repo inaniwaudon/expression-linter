@@ -22,7 +22,6 @@
   ],
   "main": "./out/extension.js",
   "contributes": {},
-
   "scripts": {
     "vscode:prepublish": "rm -rf out && yarn build:bundle && yarn copy-dict",
     "build": "tsc -p ./ && yarn copy-dict",

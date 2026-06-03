@@ -40,9 +40,13 @@ export const diagnoseParticles = (
 
       // 形容動詞語幹 + で（接続助詞 or 助動詞「だ」の連用形）
       // kuromoji の品詞分類によらず surface_form と前トークンで判定する
+      // IPAdic では「滑らか」等は pos="名詞", pos_detail_1="形容動詞語幹" に分類される
+      const isPrevNaAdj =
+        prev?.pos === "形容動詞" ||
+        (prev?.pos === "名詞" && prev?.pos_detail_1 === "形容動詞語幹");
       if (
         token.surface_form === "で" &&
-        prev?.pos === "形容動詞" &&
+        isPrevNaAdj &&
         next?.surface_form !== "は"
       ) {
         const startCol = token.word_position - 1;
