@@ -3,6 +3,11 @@
   "displayName": "expression-linter",
   "description": "論文表現をチェックするリンタ",
   "version": "0.1.0",
+  "publisher": "inaniwaudon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inaniwaudon/expression-linter.git"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -17,8 +22,9 @@
   ],
   "main": "./out/extension.js",
   "contributes": {},
+
   "scripts": {
-    "vscode:prepublish": "npm run build",
+    "vscode:prepublish": "yarn build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "publish": "vsce publish",
