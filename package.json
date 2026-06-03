@@ -1,6 +1,6 @@
 {
   "name": "expression-linter",
-  "displayName": "Expression Linter (論文表現チェック)",
+  "displayName": "Expression Linter (論文表現)",
   "description": "論文の日本語表現をチェックする linter",
   "version": "0.1.0",
   "engines": {
@@ -31,9 +31,12 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "lint": "biome check src",
+    "format": "biome format --write src"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
     "@types/node": "^20.0.0",
     "@types/vscode": "^1.85.0",
     "typescript": "^5.3.0"
