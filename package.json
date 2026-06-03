@@ -1,0 +1,45 @@
+{
+  "name": "expression-linter",
+  "displayName": "Expression Linter (論文表現チェック)",
+  "description": "論文の日本語表現をチェックする linter",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [],
+    "configuration": {
+      "title": "Expression Linter",
+      "properties": {
+        "expressionLinter.enabledFileTypes": {
+          "type": "array",
+          "default": [
+            "tex",
+            "markdown",
+            "plaintext"
+          ],
+          "description": "Linting を有効にするファイルタイプ"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@types/kuromoji": "^0.1.3",
+    "kuromoji": "^0.1.2"
+  }
+}
