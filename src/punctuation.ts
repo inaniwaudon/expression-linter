@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { SOURCE } from "./utils";
 
 // 和文スタイル: 、。  学術スタイル: ，．
 const JA_RE = /[、。]/g;
@@ -40,10 +41,10 @@ export const diagnosePunctuation = (
     const range = new vscode.Range(pos, document.positionAt(m.index + 1));
     const diag = new vscode.Diagnostic(
       range,
-      `句読点の揺れ：「${m[0]}」が混在しています。\n→ 文書内で${suggest}に統一してください。`,
+      `句読点の揺れ：「${m[0]}」が混在しています．\n→ 文書内で${suggest}に統一してください．`,
       vscode.DiagnosticSeverity.Warning,
     );
-    diag.source = "論文表現";
+    diag.source = SOURCE;
     return diag;
   });
 };
