@@ -1,7 +1,10 @@
 .vscode/**
+.claude/**
 src/**
 node_modules/**
 .gitignore
+biome.json
 tsconfig.json
+test.md
 **/*.ts
 **/*.map

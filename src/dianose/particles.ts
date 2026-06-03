@@ -35,18 +35,36 @@ export const diagnoseParticles = (
         continue;
       }
 
-      if (token.pos !== "助詞") {
+      const prev = i > 0 ? tokens[i - 1] : null;
+      const next = i < tokens.length - 1 ? tokens[i + 1] : null;
+
+      // 形容動詞語幹 + で（接続助詞 or 助動詞「だ」の連用形）
+      // kuromoji の品詞分類によらず surface_form と前トークンで判定する
+      if (
+        token.surface_form === "で" &&
+        prev?.pos === "形容動詞" &&
+        next?.surface_form !== "は"
+      ) {
+        const startCol = token.word_position - 1;
+        const endCol = startCol + token.surface_form.length;
+        diagnostics.push(
+          makeDiag(
+            makeRange(document, lineNum, startCol, endCol),
+            "「で」は多義語です．\n→「〜かつ」等",
+          ),
+        );
         continue;
       }
 
-      const prev = i > 0 ? tokens[i - 1] : null;
-      const next = i < tokens.length - 1 ? tokens[i + 1] : null;
+      if (token.pos !== "助詞") {
+        continue;
+      }
 
       let message: string | null = null;
 
       switch (token.surface_form) {
         case "で":
-          if (token.pos_detail_1 === "格助詞") {
+          if (token.pos_detail_1 === "格助詞" && next?.surface_form !== "は") {
             message =
               "「で」は多義語です．\n→ 「〜により」「〜を用いて」「〜にて」等";
           }

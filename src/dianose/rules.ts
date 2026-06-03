@@ -113,6 +113,13 @@ export const rules: Rule[] = [
       "数値と単位の間にスペースを入れてください．LaTeX では siunitx を導入して \\SI{値}{単位} を推奨します．",
   },
   {
+    // 文末の断定「だ」→「である」．「では」は で+は であり だ を含まないため除外不要
+    pattern: /だ(?=[。．])/g,
+    message: "文末の「〜だ」は口語的な表現です．",
+    severity: vscode.DiagnosticSeverity.Warning,
+    suggestion: "「〜である」",
+  },
+  {
     // 引用番号 [1] の直前にスペースなし
     pattern: /[a-zA-Z぀-鿿]\[\d+\]/g,
     message: "引用番号の前にスペースが必要です．",

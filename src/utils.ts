@@ -14,7 +14,7 @@ export const initTokenizer = (extensionPath: string): Promise<void> => {
     return initPromise;
   }
 
-  const dicPath = path.join(extensionPath, "node_modules", "kuromoji", "dict");
+  const dicPath = path.join(extensionPath, "out", "dict");
   initPromise = new Promise((resolve, reject) => {
     kuromoji.builder({ dicPath }).build((err, built) => {
       if (err) {

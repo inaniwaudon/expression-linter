@@ -1,11 +1,15 @@
 # expression-linter
 
-論文やレポートの執筆時に注意すべき論文表現をチェックする VSCode 拡張機能です．
+論文やレポートの執筆時に注意すべき論文表現をチェックする Visual Studio Code 用拡張機能です．
+
+https://marketplace.visualstudio.com/items?itemName=inaniwaudon.expression-linter
 
 ## 使い方
 
-`.tex`，`.md`，`.txt` のいずれかのファイルを開くと自動的に有効になります．
-ファイルを編集するたびに診断が更新されます．
+[expression-linter - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=inaniwaudon.expression-linter) から拡張機能をインストールします．
+または，[Releases](https://github.com/inaniwaudon/expression-linter/releases) からビルド済みの VSIX ファイルをダウンロードして，インストールします．
+
+`.tex`，`.md`，`.txt` のいずれかのファイルを開くと拡張機能が有効になります．ファイルを編集するたびにリンタが走ります．
 
 ## チェックされる例
 
@@ -23,8 +27,9 @@ Tanaka[1]は先行研究を提案した．
 ```bash
 yarn              # 依存関係のインストール
 yarn run build    # ビルド
+yarn run package  # パッケージを作成
 yarn run publish  # 公開
 ```
 
-- VScode 上でディレクトリを開いて，[F5] を押すとテストできる．
-- 拡張機能の公開時には [https://code.visualstudio.com/api/working-with-extensions/publishing-extension](Publishing Extensions) を参考にする．
+- VScode 上でディレクトリを開いて，[F5] を押すとテストできます．
+- 拡張機能の公開時には [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) を参考にしてください．
