@@ -1,7 +1,6 @@
-import * as vscode from "vscode";
-import { SOURCE } from "./utils";
+import type * as vscode from "vscode";
+import { makeDiagAt } from "./utils";
 
-// 和文スタイル: 、。  学術スタイル: ，．
 const JA_RE = /[、。]/g;
 const EN_RE = /[，．]/g;
 
@@ -36,15 +35,12 @@ export const diagnosePunctuation = (
     ...(flagEn ? enMatches : []),
   ];
 
-  return minorities.map((m) => {
-    const pos = document.positionAt(m.index);
-    const range = new vscode.Range(pos, document.positionAt(m.index + 1));
-    const diag = new vscode.Diagnostic(
-      range,
+  return minorities.map((m) =>
+    makeDiagAt(
+      document,
+      m.index,
+      1,
       `句読点の揺れ：「${m[0]}」が混在しています．\n→ 文書内で${suggest}に統一してください．`,
-      vscode.DiagnosticSeverity.Warning,
-    );
-    diag.source = SOURCE;
-    return diag;
-  });
+    ),
+  );
 };
