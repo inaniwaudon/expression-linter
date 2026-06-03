@@ -2,7 +2,7 @@
   "name": "expression-linter",
   "displayName": "expression-linter",
   "description": "論文表現をチェックするリンタ",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "inaniwaudon",
   "repository": {
     "type": "git",
