@@ -21,6 +21,7 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
+    "publish": "vsce publish",
     "lint": "biome check src",
     "format": "biome format --write src"
   },

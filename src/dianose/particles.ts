@@ -21,6 +21,20 @@ export const diagnoseParticles = (
 
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
+
+      // 「等」は助詞に分類されないため先に処理する
+      if (token.surface_form === "等") {
+        const startCol = token.word_position - 1;
+        const endCol = startCol + token.surface_form.length;
+        diagnostics.push(
+          makeDiag(
+            makeRange(document, lineNum, startCol, endCol),
+            "「等」は例を複数挙げた場合のみ使用できます．\n→ 他に例を挙げない場合は言い切ることが望ましいです．",
+          ),
+        );
+        continue;
+      }
+
       if (token.pos !== "助詞") {
         continue;
       }
@@ -42,10 +56,12 @@ export const diagnoseParticles = (
           break;
         case "と":
           // 並立用法（名詞+と+名詞）は並立助詞に分類される
+          // 「A と B との」パターンは除外する
           if (
             token.pos_detail_1 === "並立助詞" &&
             prev?.pos === "名詞" &&
-            next?.pos === "名詞"
+            next?.pos === "名詞" &&
+            tokens[i + 2]?.surface_form !== "と"
           ) {
             message = "「と」は曖昧な表現です．\n→「および」「ならびに」";
           }
@@ -64,10 +80,6 @@ export const diagnoseParticles = (
         case "など":
           message =
             "「など」は例を複数挙げた場合のみ使用できます．\n→ 他に例を挙げない場合は言い切ることが望ましいです．";
-          break;
-        case "等":
-          message =
-            "「等」は例を複数挙げた場合のみ使用できます．\n→ 他に例を挙げない場合は言い切ることが望ましいです．";
           break;
       }
 
